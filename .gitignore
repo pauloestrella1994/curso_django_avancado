@@ -26,6 +26,12 @@ var/
 *.egg
 .env
 .venv/
+/bin
+/venv
+/share/python-wheels
+/include/python2.7
+/lib
+/local
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
