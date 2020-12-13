@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load filters %}
+
 
 
 {% block title %} Administracao {% endblock %}
@@ -15,12 +17,13 @@
             <ul class="list-group">
                 {% for person in persons %}
                     <li class="list-group-item">
-                        <a href="{% url 'persons_update' person.id %}">{{ person.first_name }}</a>
+                        <a href="{% url 'persons_update' person.id %}">{{ person.first_name|title }}</a>
                         <a href="{% url 'persons_delete' person.id %}" class="trash-item">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </li>
-
+                {% empty %}
+                    <li>Desculpe, nenhuma pessoa cadastrada</li>
                 {% endfor %}
             </ul>
 
@@ -42,13 +45,14 @@
         </div>
     </div>
 
+{% if persons|length >= 20 %}
+    Você tem mais que 20 clientes
+{% endif %}
+
+<!-- Exemplo de arrendondamento no template{{ 123.3445|arrendonda:2 }} -->
 
 {% endblock %}
 
 {% block footer %}
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Desenvolvimento web com Django 2.x</span>
-      </div>
-    </footer>
+    {% include 'clientes/footer.html' %}
 {% endblock %}
